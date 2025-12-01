@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Aba de Configuração</title>
+    <link rel="stylesheet" href="login.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="logo">
+      <img
+        src="../imgfpr/file_000000007af061f98d44baf6fe68f3f2.png"
+        alt="logo"
+        width="100px"
+        height="100px"
+      />
+
+      <ul>
+        <li><a href="login1.html">Voltar</a></li>
+      </ul>
+    </div>
+    <div class="config-container">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('geral')">Geral</div>
+        <div class="tab" onclick="showTab('aparencia')">Aparência</div>
+        <div class="tab" onclick="showTab('conta')">Conta</div>
+      </div>
+
+      <div id="geral" class="tab-content active">
+        <h2>Configurações Gerais</h2>
+        <p>Modifique preferências básicas do sistema.</p>
+        <label>
+          Nome:
+          <input type="text" placeholder="Digite seu nome" />
+        </label>
+      </div>
+
+      <div id="aparencia" class="tab-content">
+        <h2>Aparência</h2>
+        <p>Escolha temas e layout do sistema.</p>
+        <label>
+          Tema:
+          <select>
+            <option>Claro</option>
+            <option>Escuro</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="conta" class="tab-content">
+        <h2>Conta</h2>
+        <p>Altere senha e detalhes da sua conta.</p>
+        <label>
+          Email:
+          <input type="email" placeholder="seu@email.com" />
+        </label>
+      </div>
+    </div>
+
+    <script src="config.js"></script>
+  </body>
+</html>
