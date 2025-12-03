@@ -1,222 +1,180 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Loja de Eletrodomésticos</title>
-
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-    }
-
-    /* GRID DE PRODUTOS */
-    .produtos-container {
-        padding: 30px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-    }
-
-    .produto-card {
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        overflow: hidden;
-        transition: 0.2s;
-    }
-
-    .produto-card:hover {
-        transform: scale(1.03);
-    }
-
-    .produto-card img {
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-    }
-
-    .produto-info {
-        padding: 15px;
-    }
-
-    .produto-info h3 {
-        margin: 0;
-        font-size: 18px;
-    }
-
-    .produto-info p {
-        margin: 5px 0;
-        font-weight: bold;
-        color: #444;
-    }
-
-    .produto-info button {
-        margin-top: 10px;
-        width: 100%;
-        padding: 10px;
-        border: none;
-        background: black;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    /* BOTÃO DO CARRINHO (igual SHEIN) */
-    #btnCarrinho {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: black;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 30px;
-        cursor: pointer;
-        z-index: 999;
-        font-weight: bold;
-    }
-
-    #btnCarrinho span {
-        background: white;
-        color: black;
-        padding: 3px 7px;
-        border-radius: 50%;
-        margin-left: 8px;
-        font-size: 14px;
-    }
-
-    /* CARRINHO LATERAL - estilo SHEIN */
-    #carrinho {
-        position: fixed;
-        top: 0;
-        right: -400px;
-        width: 350px;
-        height: 100%;
-        background: white;
-        box-shadow: -2px 0 8px rgba(0,0,0,0.2);
-        transition: 0.4s ease;
-        padding: 20px;
-        overflow-y: auto;
-        z-index: 1000;
-    }
-
-    #carrinho.open {
-        right: 0;
-    }
-
-    #carrinho h2 {
-        margin-top: 0;
-    }
-
-    .item-carrinho {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 15px;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-    }
-
-    .item-carrinho img {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-        border-radius: 5px;
-    }
-
-    #total {
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 20px;
-        display: block;
-    }
-</style>
-</head>
-<body>
-
-<!-- BOTÃO DO CARRINHO -->
-<div id="btnCarrinho">Carrinho <span id="contador">0</span></div>
-
-<!-- GRID DE PRODUTOS -->
-<div class="produtos-container">
-
-    <div class="produto-card">
-        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31b" alt="Geladeira">
-        <div class="produto-info">
-            <h3>Geladeira Frost Free</h3>
-            <p>R$ 2.899,00</p>
-            <button onclick="addCarrinho('Geladeira Frost Free', 2899, this.parentNode.parentNode.querySelector('img').src)">Adicionar</button>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="lojas.css" />
+    <title>Achei Posse — Eletromóveis</title>
+    <meta
+      name="description"
+      content="Loja online de eletromóveis — geladeiras, fogões, máquinas de lavar e mais."
+    />
+  
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div class="logo">
+            <img src="imgfpr/suprilar-eletromoveis.jpg" width="40px" />
+          </div>
+          <div>
+            <div style="font-weight: 800">Achei Posse</div>
+            <div style="font-size: 12px; color: var(--muted)">Eletromóveis</div>
+          </div>
         </div>
-    </div>
-
-    <div class="produto-card">
-        <img src="https://images.unsplash.com/photo-1581579185169-1f2deaf46c89" alt="Máquina de Lavar">
-        <div class="produto-info">
-            <h3>Máquina de Lavar 12kg</h3>
-            <p>R$ 1.799,00</p>
-            <button onclick="addCarrinho('Máquina de Lavar 12kg', 1799, this.parentNode.parentNode.querySelector('img').src)">Adicionar</button>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <nav>
+            <a href="#produtos">Produtos</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Contato</a>
+            <a href="login1.html">Voltar</a>
+          </nav>
+          <div style="display: flex; gap: 10px; align-items: center">
+            <button class="cart-btn" id="openCartBtn" title="Ver carrinho">
+              🛒 <span class="cart-count" id="cartCount">0</span>
+            </button>
+          </div>
         </div>
-    </div>
+      </div>
+    </header>
 
-    <div class="produto-card">
-        <img src="https://images.unsplash.com/photo-1611095973730-3c78a09a56dd" alt="Micro-ondas">
-        <div class="produto-info">
-            <h3>Micro-ondas 20L</h3>
-            <p>R$ 499,00</p>
-            <button onclick="addCarrinho('Micro-ondas 20L', 499, this.parentNode.parentNode.querySelector('img').src)">Adicionar</button>
+    <main class="container">
+      <section class="hero">
+        <div class="hero-card">
+          <h1>Os melhores eletromóveis para sua casa</h1>
+          <p class="lead">
+            Ofertas, entrega rápida e garantia. Compare modelos, adicione ao
+            carrinho e finalize em poucos passos.
+          </p>
+          <a class="cta" href="#produtos">Ver produtos</a>
+
+          <div class="search">
+            <input
+              id="searchInput"
+              placeholder="Buscar por geladeira, fogão, TV..."
+            />
+            <select
+              id="sortSelect"
+              style="
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid #e6eef8;
+              "
+            >
+              <option value="relevance">Mais relevantes</option>
+              <option value="price-asc">Preço: menor</option>
+              <option value="price-desc">Preço: maior</option>
+            </select>
+          </div>
+
+          <div class="filters" id="categoryChips">
+            <div class="chip" data-cat="all">Todos</div>
+            <div class="chip" data-cat="geladeira">Geladeiras</div>
+            <div class="chip" data-cat="fogao">Fogões</div>
+            <div class="chip" data-cat="lava">Máquinas de lavar</div>
+            <div class="chip" data-cat="micro">Micro-ondas</div>
+            <div class="chip" data-cat="tv">TVs</div>
+          </div>
         </div>
-    </div>
 
-    <div class="produto-card">
-        <img src="https://images.unsplash.com/photo-1606813907291-0f6f3be2b8f1" alt="Liquidificador">
-        <div class="produto-info">
-            <h3>Liquidificador Turbo</h3>
-            <p>R$ 199,00</p>
-            <button onclick="addCarrinho('Liquidificador Turbo', 199, this.parentNode.parentNode.querySelector('img').src)">Adicionar</button>
+        <aside>
+          <div
+            style="
+              background: linear-gradient(180deg, #f8fbff, #ffffff);
+              border-radius: 12px;
+              padding: 18px;
+              box-shadow: 0 8px 20px rgba(11, 116, 222, 0.06);
+            "
+          >
+            <h3 style="margin-top: 0">Promoção da semana</h3>
+            <p style="color: var(--muted)">
+              Geladeira Frost Free Inox — 20% OFF + frete grátis na região.
+            </p>
+            <div style="margin-top: 10px">
+              <strong>Parcelamos em até 10x</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="produtos">
+        <div class="toolbar">
+          <h2>Produtos</h2>
+          <div style="color: var(--muted)">
+            <span id="resultsCount">0</span> resultados
+          </div>
         </div>
-    </div>
 
-</div>
+        <div class="grid" id="productsGrid"></div>
+      </section>
 
-<!-- CARRINHO LATERAL -->
-<div id="carrinho">
-    <h2>Meu Carrinho</h2>
-    <div id="listaCarrinho"></div>
-    <span id="total">Total: R$ 0,00</span>
-</div>
-
-<script>
-let total = 0;
-let contador = 0;
-
-document.getElementById("btnCarrinho").onclick = () => {
-    document.getElementById("carrinho").classList.toggle("open");
-};
-
-function addCarrinho(nome, preco, imagem) {
-    contador++;
-    document.getElementById("contador").textContent = contador;
-
-    total += preco;
-    document.getElementById("total").textContent = 
-        `Total: R$ ${total.toFixed(2)}`;
-
-    const lista = document.getElementById("listaCarrinho");
-
-    const item = document.createElement("div");
-    item.classList.add("item-carrinho");
-
-    item.innerHTML = `
-        <img src="${imagem}">
-        <div>
-            <h4>${nome}</h4>
-            <p>R$ ${preco.toFixed(2)}</p>
+      <section id="sobre" style="margin-top: 28px">
+        <div
+          style="
+            background: var(--card);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #edf3fb;
+          "
+        >
+          <h3>Sobre a Achei Posse</h3>
+          <p class="lead">
+            A Achei Posse existe para levar soluções práticas e confiáveis para
+            sua casa. Selecionamos marcas com garantia e oferecemos suporte para
+            a entrega.
+          </p>
         </div>
-    `;
+      </section>
+    </main>
 
-    lista.appendChild(item);
-}
-</script>
+    <footer>
+      <div class="container">
+        <div style="padding-top: 14px">
+          © <span id="year"></span> Achei Posse — Todos os direitos reservados
+        </div>
+      </div>
+    </footer>
 
-</body>
+    <template id="cartTemplate">
+      <div class="overlay" id="cartOverlay">
+        <div class="modal">
+          <h3>Carrinho</h3>
+          <div id="cartItems"></div>
+          <div
+            style="
+              margin-top: 12px;
+              display: flex;
+              gap: 8px;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <strong>Total: <span id="cartTotal">R$ 0,00</span></strong>
+            <div style="display: flex; gap: 8px">
+              <button
+                id="checkoutBtn"
+                class="cta"
+                style="background: var(--success); border: none"
+              >
+                Finalizar
+              </button>
+              <button
+                id="closeCartBtn"
+                style="
+                  background: transparent;
+                  border: 1px solid #e6eef8;
+                  padding: 8px;
+                  border-radius: 8px;
+                "
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <script src="lojas.js"></script>
+  </body>
 </html>

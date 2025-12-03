@@ -1,10 +1,185 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HP eletromóveis</title>
-    <link rel="stylesheet" href="autolar.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="lojas.css">
+    <title> HP — Eletromóveis</title>
+    <meta
+      name="description"
+      content="Loja online de eletromóveis — geladeiras, fogões, máquinas de lavar e mais."
+    />
+   
   </head>
-  <body></body>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="brand">
+             <div class="logo"><img src="imgfpr/hp.jpg" width="40px"></div>
+          <div>
+            <div style="font-weight: 800">HP-Eletromóveis</div>
+            <div style="font-size: 12px; color: var(--muted)">
+              Eletromóveis
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <nav>
+            <a href="#produtos">Produtos</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#contato">Contato</a>
+            <a href="login1.html">Voltar</a>
+          </nav>
+          <div style="display: flex; gap: 10px; align-items: center">
+            <button class="cart-btn" id="openCartBtn" title="Ver carrinho">
+              🛒 <span class="cart-count" id="cartCount">0</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <div class="hero-card">
+          <h1>Os melhores eletromóveis para sua casa</h1>
+          <p class="lead">
+            Ofertas, entrega rápida e garantia. Compare modelos, adicione ao
+            carrinho e finalize em poucos passos.
+          </p>
+          <a class="cta" href="#produtos">Ver produtos</a>
+
+          <div class="search">
+            <input
+              id="searchInput"
+              placeholder="Buscar por geladeira, fogão, TV..."
+            />
+            <select
+              id="sortSelect"
+              style="
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid #e6eef8;
+              "
+            >
+              <option value="relevance">Mais relevantes</option>
+              <option value="price-asc">Preço: menor</option>
+              <option value="price-desc">Preço: maior</option>
+            </select>
+          </div>
+
+          <div class="filters" id="categoryChips">
+            <div class="chip" data-cat="all">Todos</div>
+            <div class="chip" data-cat="geladeira">Geladeiras</div>
+            <div class="chip" data-cat="fogao">Fogões</div>
+            <div class="chip" data-cat="lava">Máquinas de lavar</div>
+            <div class="chip" data-cat="micro">Micro-ondas</div>
+            <div class="chip" data-cat="tv">TVs</div>
+          </div>
+        </div>
+
+        <aside>
+          <div
+            style="
+              background: linear-gradient(180deg, #f8fbff, #ffffff);
+              border-radius: 12px;
+              padding: 18px;
+              box-shadow: 0 8px 20px rgba(11, 116, 222, 0.06);
+            "
+          >
+            <h3 style="margin-top: 0">Promoção da semana</h3>
+            <p style="color: var(--muted)">
+              Geladeira Frost Free Inox — 20% OFF + frete grátis na região.
+            </p>
+            <div style="margin-top: 10px">
+              <strong>Parcelamos em até 10x</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="produtos">
+        <div class="toolbar">
+          <h2>Produtos</h2>
+          <div style="color: var(--muted)">
+            <span id="resultsCount">0</span> resultados
+          </div>
+        </div>
+
+        <div class="grid" id="productsGrid">
+       
+        </div>
+      </section>
+
+      <section id="sobre" style="margin-top: 28px">
+        <div
+          style="
+            background: var(--card);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid #edf3fb;
+          "
+        >
+          <h3>Sobre a HP</h3>
+          <p class="lead">
+            A HP existe para levar soluções práticas e confiáveis para
+            sua casa. Selecionamos marcas com garantia e oferecemos suporte para
+            a entrega.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div style="padding-top: 14px">
+          © <span id="year"></span> HP — Todos os direitos reservados
+        </div>
+      </div>
+    </footer>
+
+   
+    <template id="cartTemplate">
+      <div class="overlay" id="cartOverlay">
+        <div class="modal">
+          <h3>Carrinho</h3>
+          <div id="cartItems"></div>
+          <div
+            style="
+              margin-top: 12px;
+              display: flex;
+              gap: 8px;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <strong>Total: <span id="cartTotal">R$ 0,00</span></strong>
+            <div style="display: flex; gap: 8px">
+              <button
+                id="checkoutBtn"
+                class="cta"
+                style="background: var(--success); border: none"
+              >
+                Finalizar
+              </button>
+              <button
+                id="closeCartBtn"
+                style="
+                  background: transparent;
+                  border: 1px solid #e6eef8;
+                  padding: 8px;
+                  border-radius: 8px;
+                "
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+  <script src="lojas.js"></script>
+  </body>
 </html>
